@@ -33,6 +33,8 @@ $(function(){
 		if ($('.new-task').hasClass('active')){
 			$('.new-task').removeClass('active');
 			enableDisableInputs();
+			$('#title').val("");
+			$('#priority').val("0");
 		}
 	}
 	//cancel "add new task" pop-up
@@ -41,12 +43,18 @@ $(function(){
 	});
 
 	//create new task
-	$('#new-task-create').click(function(){
+	$('#new-task-create').on('click', function(){
 		let title = $('#title').val();
 		let priority = $('#priority option:selected').val();
 		if (title.length > 0 && priority != 0) {
-			let tasksCount = parseInt($('.task').length);
-			let taskId = tasksCount+1;
+			//get highest id
+			let ids = $(".task").map(function() {
+			    return parseInt($(this).data('id'));
+			}).get();
+
+			let highestId = Math.max.apply(Math, ids);
+			let taskId = highestId+1;
+
 			let taskMarkup = "<div class='task' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
 					taskMarkup+= "<div class='task-status'>";
 						taskMarkup+= "<input type='checkbox' id='tb"+taskId+"'><label for='tb"+taskId+"'></label>";
@@ -68,5 +76,19 @@ $(function(){
 			}
 		}
 	});
-	
+
+	console.log($('.task[data-id="4"]').length);
+
+	//delete task
+	$('.list-content').on('click','.delete-img',function(){
+		let id = $(this).parent().parent().data('id');
+		$('.task[data-id="'+id+'"]')[0].remove();
+	});
+	// $('.delete-img').click(function(){
+	// 	console.log('awdasdas');
+	// 	let id = $(this).parent().parent().data('id');
+	// 	console.log($('.task[data-id="'+id+'"]'));
+
+	// 	// $('.task[data-id="'+id+'"]')[0].remove();
+	// });
 });

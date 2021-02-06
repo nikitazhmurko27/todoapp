@@ -311,3 +311,9 @@ input[type="checkbox"]:checked + label:after{
 .new-task-buttons button:focus{  
 	outline: 0;
 }
+
+.errorMessage{
+	padding: 10px;
+	color: #bb0b0b;
+	display: none;
+}

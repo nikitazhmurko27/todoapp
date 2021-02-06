@@ -45,7 +45,7 @@
 						<img class="delete-img" src="delete.svg">
 					</div>
 				</div>
-				<div class="task" data-id="1" data-status="done" data-priority="5">
+				<div class="task" data-id="2" data-status="done" data-priority="5">
 					<div class="task-status">
 						<input type="checkbox" id="cb2"><label for="cb2"></label>
 					</div>
@@ -57,7 +57,7 @@
 						<img class="delete-img" src="delete.svg">
 					</div>
 				</div>
-				<div class="task" data-id="1" data-status="done" data-priority="5">
+				<div class="task" data-id="3" data-status="done" data-priority="5">
 					<div class="task-status">
 						<input type="checkbox" id="cb3"><label for="cb3"></label>
 					</div>
@@ -79,7 +79,7 @@
 			<p class="new-task-title">create new task</p>
 			<div class="new-task-fields">
 					<input type="text" id="title" name="title" maxlength="255" placeholder="Title" >
-					<select id="priotity" name="priotity">
+					<select id="priority" name="priotity">
 						<option value="0">Priority</option>
 					  	<option value="1">1</option>
 					  	<option value="2">2</option>
@@ -92,6 +92,7 @@
 					  	<option value="9">9</option>
 					  	<option value="10">10</option>
 					</select>
+					<p class="errorMessage">"Title" and "Priority" are required.</p>
 					<div class="new-task-buttons">
 						<button id="new-task-cancel">cancel</button>
 						<button id="new-task-create">create</button>	

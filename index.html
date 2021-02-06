@@ -1,9 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>To-Do app</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<p>Hello World!</p>
+	<div class="container">
+		<div class="list">
+			<div class="list-header">
+				<div class="header-search"><input type="text" name="header-search" id="header-search" placeholder="Search"></div>
+				<div class="header-date">
+					<span class="bold-color" id="header-date-day">monday,</span>
+					<span id="header-date-month">March 14</span>
+				</div>
+				<div class="header-filter">
+					<div class="header-filter-status">
+						<label for="filter-status">Show</label>
+						<select id="filter-status" name="filter-status">
+						  <option value="all">All</option>
+						  <option value="done">Done</option>
+						  <option value="to_do">To Do</option>
+						</select>
+					</div>
+					<div class="header-filter-priority">
+						<label for="filter-priotity">Sort by Priority</label>
+						<select id="filter-priotity" name="filter-priotity">
+						  <option value="all">None</option>
+						  <option value="done">ASC</option>
+						  <option value="to_do">DES</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="list-content">
+				<div class="task" data-id="1" data-status="done" data-priority="5">
+					<div class="task-status">
+						<input type="checkbox" id="cb1"><label for="cb1"></label>
+					</div>
+					<div class="task-content">
+						<p class="task-content-title"> Task #1</p>
+						<p class="task-content-priority">5/10</p>
+					</div>
+					<div class="task-delete">
+						<img class="delete-img" src="delete.svg">
+					</div>
+				</div>
+				<div class="task" data-id="1" data-status="done" data-priority="5">
+					<div class="task-status">
+						<input type="checkbox" id="cb1"><label for="cb1"></label>
+					</div>
+					<div class="task-content">
+						<p class="task-content-title"> Task #1</p>
+						<p class="task-content-priority">5/10</p>
+					</div>
+					<div class="task-delete">
+						<img class="delete-img" src="delete.svg">
+					</div>
+				</div>
+				<div class="task" data-id="1" data-status="done" data-priority="5">
+					<div class="task-status">
+						<input type="checkbox" id="cb1"><label for="cb1"></label>
+					</div>
+					<div class="task-content">
+						<p class="task-content-title"> Task #1</p>
+						<p class="task-content-priority">5/10</p>
+					</div>
+					<div class="task-delete">
+						<img class="delete-img" src="delete.svg">
+					</div>
+				</div>
+			</div>
+			<div class="list-footer">
+				<div><span class="light-color" id="tasks_count">4</span><span class="light-color">tasks</span></div>
+				<div><span id="add_new">add new +</span></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
 </html>

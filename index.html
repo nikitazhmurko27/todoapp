@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="list">
 			<div class="list-header">
-				<div class="header-search"><input type="text" name="header-search" id="header-search" placeholder="Search"></div>
+				<div class="header-search"><input type="text" name="header-search" id="header-search" maxlength="255" placeholder="Enter search query"></div>
 				<div class="header-date">
 					<span class="bold-color" id="header-date-day">monday,</span>
 					<span id="header-date-month">March 14</span>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="task" data-id="1" data-status="done" data-priority="5">
 					<div class="task-status">
-						<input type="checkbox" id="cb1"><label for="cb1"></label>
+						<input type="checkbox" id="cb2"><label for="cb2"></label>
 					</div>
 					<div class="task-content">
 						<p class="task-content-title"> Task #1</p>
@@ -59,7 +59,7 @@
 				</div>
 				<div class="task" data-id="1" data-status="done" data-priority="5">
 					<div class="task-status">
-						<input type="checkbox" id="cb1"><label for="cb1"></label>
+						<input type="checkbox" id="cb3"><label for="cb3"></label>
 					</div>
 					<div class="task-content">
 						<p class="task-content-title"> Task #1</p>
@@ -73,6 +73,29 @@
 			<div class="list-footer">
 				<div><span class="light-color" id="tasks_count">4</span><span class="light-color">tasks</span></div>
 				<div><span id="add_new">add new +</span></div>
+			</div>
+		</div>
+		<div class="new-task">
+			<p class="new-task-title">create new task</p>
+			<div class="new-task-fields">
+					<input type="text" id="title" name="title" maxlength="255" placeholder="Title" >
+					<select id="priotity" name="priotity">
+						<option value="0">Priority</option>
+					  	<option value="1">1</option>
+					  	<option value="2">2</option>
+					  	<option value="3">3</option>
+					  	<option value="4">4</option>
+					  	<option value="5">5</option>
+					  	<option value="6">6</option>
+					  	<option value="7">7</option>
+					  	<option value="8">8</option>
+					  	<option value="9">9</option>
+					  	<option value="10">10</option>
+					</select>
+					<div class="new-task-buttons">
+						<button id="new-task-cancel">cancel</button>
+						<button id="new-task-create">create</button>	
+					</div>
 			</div>
 		</div>
 	</div>

@@ -24,8 +24,13 @@ body{
 	color: #6E81FF;
 }
 
+.active{
+	display: block !important;
+}
+
 .container{
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	max-width: 420px;
@@ -66,6 +71,7 @@ body{
 }
 #header-search::placeholder{
 	color: #97A4FE;
+	text-align: center;
 }
 
 #header-date-day{
@@ -104,6 +110,11 @@ body{
     justify-content: space-around;
     padding: 10px 20px;
 }
+
+.task:hover .delete-img{
+	display: block;
+}
+
 .task div{
 	padding: 5px;
 }
@@ -180,6 +191,7 @@ input[type="checkbox"]:checked + label:after{
 }
 
 .delete-img{
+	display: none;
 	width: 20px;
     height: 20px;
     padding: 5px;
@@ -219,4 +231,83 @@ input[type="checkbox"]:checked + label:after{
 
 #add_new{
 	cursor: pointer;
+}
+
+/*Add new pop-up*/
+.new-task{
+	display: none;
+	height: 300px;
+    width: 365px;
+    border: 2px solid #6E81FF;
+    position: absolute;
+    background-color: #ffffff;
+}
+
+.new-task-title{
+	text-align: center;
+	border-bottom: 2px solid #F5F8FE;
+	text-transform: uppercase;
+	padding: 10px;
+}
+
+.new-task-fields{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 270px;
+}
+
+.new-task-fields div{
+	padding: 40px 20px;
+}
+
+.new-task-fields input{  
+	width: 223px;
+	outline: 0;
+ 	border-radius: 20px;
+    border: 1px solid #97A4FE;
+ 	padding: 5px 14px;
+ 	margin-bottom: 15px;
+}
+
+.new-task-fields input::placeholder{  
+	color: #97A4FE;
+}
+
+.new-task-fields input:focus{  
+	border: 2px solid #6E81FF;
+}
+
+.new-task-fields select{  
+	width: 250px;
+	outline: 0;
+ 	border-radius: 20px;
+    border: 1px solid #97A4FE;
+ 	padding: 5px 10px;
+}
+
+.new-task-fields select:focus{  
+	border: 2px solid #6E81FF;
+}
+
+.new-task-buttons button{
+	padding: 10px;
+    text-transform: uppercase;
+    border: 1px solid #6E81FF;
+    border-radius: 20px;
+    background: #ffffff;
+    font-weight: bold;
+    color: #6E81FF;
+    cursor: pointer;
+    margin: 0 15px;
+}
+
+.new-task-buttons button:hover{  
+	background-color: #CED2FE;
+	border: 2px solid #6E81FF;
+}
+
+.new-task-buttons button:focus{  
+	outline: 0;
 }

@@ -84,11 +84,4 @@ $(function(){
 		let id = $(this).parent().parent().data('id');
 		$('.task[data-id="'+id+'"]')[0].remove();
 	});
-	// $('.delete-img').click(function(){
-	// 	console.log('awdasdas');
-	// 	let id = $(this).parent().parent().data('id');
-	// 	console.log($('.task[data-id="'+id+'"]'));
-
-	// 	// $('.task[data-id="'+id+'"]')[0].remove();
-	// });
 });

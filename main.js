@@ -58,11 +58,9 @@ $(function(){
 			//check status filter
 			let sort_status = $('#filter-status').val();
 			let sort_status_class = '';
-			console.log(sort_status);
 			if (sort_status == 'done') {
 				sort_status_class = 'hide-task';
 			}
-			console.log(sort_status_class);
 
 			let taskMarkup = "<div class='task "+sort_status_class+"' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
 					taskMarkup+= "<div class='task-status'>";
@@ -114,11 +112,11 @@ $(function(){
 		changeTaskStatus(taskId);
 	});
 
-	function sortByStatus(sort_status){
-		if (sort_status == 'done' || sort_status == 'to_do') {
+	function sortByStatus(sortStatus){
+		if (sortStatus == 'done' || sortStatus == 'to_do') {
 			$('.task').each(function(index){
 				let status = $(this).data('status');
-				if (status !== sort_status) {
+				if (status !== sortStatus) {
 					if (!$(this).hasClass('hide-task')) {
 						$(this).addClass('hide-task');
 					}
@@ -140,8 +138,33 @@ $(function(){
 
 	//sort by status
 	$('.header-filter-status').on('change', '#filter-status', function(){
-		let sort_status = $(this).val();
-		sortByStatus(sort_status);
+		let sortStatus = $(this).val();
+		sortByStatus(sortStatus);
+	});
+
+	//sort by priority 
+	function sortPriority(sort){
+		let result = $('.task').sort(function(a, b){
+			let contentA =parseInt( $(a).data('priority'));
+      		let contentB =parseInt( $(b).data('priority'));
+      		if (sort == 'asc') {
+      			return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+      		}else if(sort == 'des'){
+      			return (contentA > contentB) ? -1 : (contentA < contentB) ? 1 : 0;
+      		}else{
+      			let contentA =parseInt( $(a).data('id'));
+      			let contentB =parseInt( $(b).data('id'));
+      			return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0; 
+      		}
+		});
+		$('.list-content').empty();
+		$('.list-content').append(result);
+		return result;
+	}
+
+	$('.header-filter-priority').on('change', '#filter-priotity', function(){
+		let sortStatus = $(this).val();
+		sortPriority(sortStatus)
 	});
 
 });

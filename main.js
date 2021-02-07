@@ -1,5 +1,19 @@
 $(function(){
 	
+	//Header Date
+	let date = new Date();
+	let dayArr = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+	let monthArr = ['January', 'Ferbruary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+	let dayOfWeek = dayArr[parseInt(date.getDay())];
+	let month = monthArr[parseInt(date.getMonth())];
+	let day = date.getDate();
+
+	$('#header-date-day').text(dayOfWeek + ", ");
+	$('#header-date-month').text(month + " " + day);
+
+	console.log(dayOfWeek + ", " + month + " " + day);
+
 	//disable inputs 
 	function enableDisableInputs(){
 		if ($('.new-task').hasClass('active')) {
@@ -56,13 +70,13 @@ $(function(){
 			let taskId = highestId+1;
 
 			//check status filter
-			let sort_status = $('#filter-status').val();
-			let sort_status_class = '';
-			if (sort_status == 'done') {
-				sort_status_class = 'hide-task';
+			let sortStatus = $('#filter-status').val();
+			let sortStatusClass = '';
+			if (sortStatus == 'done') {
+				sortStatusClass = 'hide-task';
 			}
 
-			let taskMarkup = "<div class='task "+sort_status_class+"' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
+			let taskMarkup = "<div class='task "+sortStatusClass+"' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
 					taskMarkup+= "<div class='task-status'>";
 						taskMarkup+= "<input type='checkbox' name='complete' id='tb"+taskId+"'><label for='tb"+taskId+"'></label>";
 					taskMarkup+= "</div>";
@@ -75,6 +89,12 @@ $(function(){
 					taskMarkup+= "</div>";
 				taskMarkup+="</div>";
 			$('.list-content').append(taskMarkup);
+
+			//check status priority
+			let prioritySort = $('#filter-priotity').val();
+			if (prioritySort !== 'none') {
+				sortPriority(prioritySort);
+			}
 			hideAddNew();
 		}else{
 			if (!$('.errorMessage').hasClass('active')){
@@ -93,6 +113,7 @@ $(function(){
 	$('')
 
 
+	//check task as complete
 	function changeTaskStatus(taskId){
 		let task = $('.task[data-id="'+taskId+'"]');
 		if (!task.hasClass('task-done')) {
@@ -105,13 +126,14 @@ $(function(){
 			task.attr('data-status', 'to_do');
 		}
 	}
-	//check task as complete
+	
 	$('.list-content').on('click', 'input[name=complete]', function(){
 		let taskId = $(this).parent().parent().data('id');
 		//find task with current id and set as done/to_do
 		changeTaskStatus(taskId);
 	});
 
+	//sort by status
 	function sortByStatus(sortStatus){
 		if (sortStatus == 'done' || sortStatus == 'to_do') {
 			$('.task').each(function(index){
@@ -136,7 +158,6 @@ $(function(){
 		}
 	}
 
-	//sort by status
 	$('.header-filter-status').on('change', '#filter-status', function(){
 		let sortStatus = $(this).val();
 		sortByStatus(sortStatus);

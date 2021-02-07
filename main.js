@@ -23,7 +23,7 @@ $(function(){
 					let status = $(this).data('status');
 					let classes = $(this).attr('class');
 					if (status == sortStatus && classes.indexOf('hide-task') <= 0) {
-						count++
+						count++;
 					}
 				});
 			}else{
@@ -34,7 +34,7 @@ $(function(){
 				$('.task').each(function(){
 					let classes = $(this).attr('class');
 					if (classes.indexOf('hide-task') <= 0) {
-						count++
+						count++;
 					}
 				});
 			}else{
@@ -69,7 +69,7 @@ $(function(){
 	//disable inputs 
 	function enableDisableInputs(){
 		if ($('.new-task').hasClass('active')) {
-			//set opacity to main window(.list)
+			//set opacity to main window
 			$('.list').css('opacity', '0.7');
 			$('#header-search').prop('disabled', true);
 			$('#filter-status').prop('disabled', true);
@@ -154,7 +154,7 @@ $(function(){
 			}
 			hideAddNew();
 			recaluclateTasks();
-			$('#header-search').val("");
+			$('#header-search').val('');
 			search('');
 		}else{
 			if (!$('.errorMessage').hasClass('active')){
@@ -169,7 +169,7 @@ $(function(){
 		let id = $(this).parent().parent().data('id');
 		$('.task[data-id="'+id+'"]')[0].remove();
 		recaluclateTasks();
-		$('#header-search').val("");
+		$('#header-search').val('');
 		search('');
 	});
 
@@ -221,7 +221,7 @@ $(function(){
 		let sortStatus = $(this).val();
 		sortByStatus(sortStatus);
 		recaluclateTasks();
-		$('#header-search').val("");
+		$('#header-search').val('');
 		search('');
 	});
 

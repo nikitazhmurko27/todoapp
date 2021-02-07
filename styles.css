@@ -21,16 +21,6 @@ body{
 	padding: 20px;
 }
 
-.light-color{
-	color: #CED2FE;
-}
-.normal-color{
-	color: #97A4FE;
-}
-.bold-color{
-	color: #6E81FF;
-}
-
 .active{
 	display: block !important;
 }
@@ -93,6 +83,7 @@ body{
 #header-date-day{
 	text-transform: uppercase;
 	font-weight: bold;
+	color: #6E81FF;
 }
 
 .header-filter{
@@ -244,6 +235,7 @@ input[type="checkbox"]:checked + label:after{
 }
 #tasks_count{
 	padding-right: 5px;
+	color: #CED2FE;
 }
 
 #add_new{

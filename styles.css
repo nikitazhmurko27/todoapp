@@ -14,6 +14,13 @@ body{
 	height: 100%;
 }
 
+.no-tasks{
+	text-align: center;
+	font-style: italic;
+	display: none;
+	padding: 20px;
+}
+
 .light-color{
 	color: #CED2FE;
 }
@@ -111,6 +118,7 @@ body{
 	height: 70%;
 	display: flex;
 	flex-direction: column;
+	overflow: auto;
 }
 
 .task{

@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>To-Do app</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -33,45 +34,10 @@
 				</div>
 			</div>
 			<div class="list-content">
-				<div class="task" data-id="1" data-status="to_do" data-priority="5">
-					<div class="task-status">
-						<input type="checkbox" name="complete" id="cb1"><label for="cb1"></label>
-					</div>
-					<div class="task-content">
-						<p class="task-content-title"> Task #1</p>
-						<p class="task-content-priority">5/10</p>
-					</div>
-					<div class="task-delete">
-						<img class="delete-img" src="delete.svg">
-					</div>
-				</div>
-				<div class="task" data-id="2" data-status="to_do" data-priority="8">
-					<div class="task-status">
-						<input type="checkbox" name="complete" id="cb2"><label for="cb2"></label>
-					</div>
-					<div class="task-content">
-						<p class="task-content-title"> Task #2</p>
-						<p class="task-content-priority">8/10</p>
-					</div>
-					<div class="task-delete">
-						<img class="delete-img" src="delete.svg">
-					</div>
-				</div>
-				<div class="task" data-id="3" data-status="to_do" data-priority="2">
-					<div class="task-status">
-						<input type="checkbox" name="complete" id="cb3"><label for="cb3"></label>
-					</div>
-					<div class="task-content">
-						<p class="task-content-title"> Task #3</p>
-						<p class="task-content-priority">2/10</p>
-					</div>
-					<div class="task-delete">
-						<img class="delete-img" src="delete.svg">
-					</div>
-				</div>
+				<p class="no-tasks active">There are no added tasks yet.</p>
 			</div>
 			<div class="list-footer">
-				<div><span class="light-color" id="tasks_count">4</span></div>
+				<div><span class="light-color" id="tasks_count">0 tasks</span></div>
 				<div><span id="add_new">add new +</span></div>
 			</div>
 		</div>

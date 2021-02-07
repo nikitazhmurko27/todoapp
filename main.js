@@ -46,6 +46,24 @@ $(function(){
 		}else{
 			$('#tasks_count').text(count + " tasks");
 		}
+
+		if (count == 0) {
+			if ($('.no-tasks').length <= 0) {
+				$('.list-content').append('<p class="no-tasks active">There are no added tasks yet.</p>');
+			}
+
+			if (!$('.no-tasks').hasClass('active')) {
+				$('.no-tasks').addClass('active');
+			}
+		}else{
+			if ($('.no-tasks').length <= 0) {
+				$('.list-content').append('<p class="no-tasks active">There are no added tasks yet.</p>');
+			}
+
+			if ($('.no-tasks').hasClass('active')) {
+				$('.no-tasks').removeClass('active');
+			}
+		}
 	}
 
 	//disable inputs 
@@ -95,13 +113,18 @@ $(function(){
 		let title = $('#title').val();
 		let priority = $('#priority option:selected').val();
 		if (title.length > 0 && priority != 0) {
-			//get highest id
-			let ids = $(".task").map(function() {
-			    return parseInt($(this).data('id'));
-			}).get();
+			
+			let taskId = 1;
+			let currentTasksCount = parseInt($('.task').length);
+			if (currentTasksCount > 0) {
+				//get highest id
+				let ids = $(".task").map(function() {
+				    return parseInt($(this).data('id'));
+				}).get();
 
-			let highestId = Math.max.apply(Math, ids);
-			let taskId = highestId+1;
+				let highestId = Math.max.apply(Math, ids);
+				taskId = highestId+1;
+			}
 
 			//check status filter
 			let sortStatus = $('#filter-status').val();
@@ -119,7 +142,7 @@ $(function(){
 						taskMarkup+="<p class='task-content-priority'>"+priority+"/10</p>";
 					taskMarkup+= "</div>";
 					taskMarkup+= "<div class='task-delete'>";
-						taskMarkup+="<img class='delete-img' src='delete.svg'>";
+						taskMarkup+="<img class='delete-img' src='images/delete.svg'>";
 					taskMarkup+= "</div>";
 				taskMarkup+="</div>";
 			$('.list-content').append(taskMarkup);

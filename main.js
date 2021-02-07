@@ -16,24 +16,13 @@ $(function(){
 		}
 	}
 
-	function changeTaskStatus(taskId){
-		let task = $('.task[data-id="'+taskId+'"]');
-		if (!task.hasClass('task-done')) {
-			task.addClass('task-done');
-			task.attr('data-status', 'done');
-		}else{
-			task.removeClass('task-done');
-			task.attr('data-status', 'to_do');
-		}
-	}
-
 	function hideErrorMsg(){
 		if ($('.errorMessage').hasClass('active')){
 			$('.errorMessage').removeClass('active');
 		}
 	}
 	//open "add new task" pop-up
-	$('#add_new').on('click', function(){
+	$('.list-footer').on('click','#add_new', function(){
 		if (!$('.new-task').hasClass('active')){
 			$('.new-task').addClass('active');
 			enableDisableInputs();
@@ -49,12 +38,12 @@ $(function(){
 		}
 	}
 	//cancel "add new task" pop-up
-	$('#new-task-cancel').on('click', function(){
+	$('.new-task-buttons').on('click', '#new-task-cancel', function(){
 		hideAddNew();
 	});
 
 	//create new task
-	$('#new-task-create').on('click', function(){
+	$('.new-task-buttons').on('click', '#new-task-create', function(){
 		let title = $('#title').val();
 		let priority = $('#priority option:selected').val();
 		if (title.length > 0 && priority != 0) {
@@ -66,7 +55,16 @@ $(function(){
 			let highestId = Math.max.apply(Math, ids);
 			let taskId = highestId+1;
 
-			let taskMarkup = "<div class='task' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
+			//check status filter
+			let sort_status = $('#filter-status').val();
+			let sort_status_class = '';
+			console.log(sort_status);
+			if (sort_status == 'done') {
+				sort_status_class = 'hide-task';
+			}
+			console.log(sort_status_class);
+
+			let taskMarkup = "<div class='task "+sort_status_class+"' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
 					taskMarkup+= "<div class='task-status'>";
 						taskMarkup+= "<input type='checkbox' name='complete' id='tb"+taskId+"'><label for='tb"+taskId+"'></label>";
 					taskMarkup+= "</div>";
@@ -94,12 +92,56 @@ $(function(){
 		$('.task[data-id="'+id+'"]')[0].remove();
 	});
 
+	$('')
+
+
+	function changeTaskStatus(taskId){
+		let task = $('.task[data-id="'+taskId+'"]');
+		if (!task.hasClass('task-done')) {
+			task.addClass('task-done');
+			task.data('status', 'done');
+			task.attr('data-status', 'done');
+		}else{
+			task.removeClass('task-done');
+			task.data('status', 'to_do');
+			task.attr('data-status', 'to_do');
+		}
+	}
 	//check task as complete
-	$('.task-status').on('click', 'input[name=complete]', function(){
+	$('.list-content').on('click', 'input[name=complete]', function(){
 		let taskId = $(this).parent().parent().data('id');
-		//find task with current id and set as complete
+		//find task with current id and set as done/to_do
 		changeTaskStatus(taskId);
 	});
 
-	
+	function sortByStatus(sort_status){
+		if (sort_status == 'done' || sort_status == 'to_do') {
+			$('.task').each(function(index){
+				let status = $(this).data('status');
+				if (status !== sort_status) {
+					if (!$(this).hasClass('hide-task')) {
+						$(this).addClass('hide-task');
+					}
+				}else{
+					if ($(this).hasClass('hide-task')) {
+						$(this).removeClass('hide-task');
+					}
+				}
+			});
+		}else{
+			$('.task').each(function(){
+				let status = $(this).data('status');
+				if ($(this).hasClass('hide-task')) {
+					$(this).removeClass('hide-task');
+				}
+			});
+		}
+	}
+
+	//sort by status
+	$('.header-filter-status').on('change', '#filter-status', function(){
+		let sort_status = $(this).val();
+		sortByStatus(sort_status);
+	});
+
 });

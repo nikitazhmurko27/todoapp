@@ -15,10 +15,31 @@ $(function(){
 	function recaluclateTasks(){
 		let sortStatus = $('#filter-status').val();
 		let count = 0;
+		let criteria = $('#header-search').val();
+		
 		if (sortStatus != 'all') {
-			count = parseInt($('.task[data-status="'+sortStatus+'"]').length);
+			if (criteria.length > 0) {
+				$('.task').each(function(){
+					let status = $(this).data('status');
+					let classes = $(this).attr('class');
+					if (status == sortStatus && classes.indexOf('hide-task') <= 0) {
+						count++
+					}
+				});
+			}else{
+				count = parseInt($('.task[data-status="'+sortStatus+'"]').length);
+			}
 		}else{
-			count = parseInt($('.task').length);
+			if (criteria.length > 0) {
+				$('.task').each(function(){
+					let classes = $(this).attr('class');
+					if (classes.indexOf('hide-task') <= 0) {
+						count++
+					}
+				});
+			}else{
+				count = parseInt($('.task').length);
+			}
 		}
 		if (count == 1) {
 			$('#tasks_count').text(count + " task");
@@ -109,7 +130,9 @@ $(function(){
 				sortPriority(prioritySort);
 			}
 			hideAddNew();
-			recaluclateTasks()
+			recaluclateTasks();
+			$('#header-search').val("");
+			search('');
 		}else{
 			if (!$('.errorMessage').hasClass('active')){
 				$('.errorMessage').addClass('active');
@@ -123,6 +146,8 @@ $(function(){
 		let id = $(this).parent().parent().data('id');
 		$('.task[data-id="'+id+'"]')[0].remove();
 		recaluclateTasks();
+		$('#header-search').val("");
+		search('');
 	});
 
 	//check task as complete
@@ -162,7 +187,6 @@ $(function(){
 			});
 		}else{
 			$('.task').each(function(){
-				let status = $(this).data('status');
 				if ($(this).hasClass('hide-task')) {
 					$(this).removeClass('hide-task');
 				}
@@ -174,6 +198,8 @@ $(function(){
 		let sortStatus = $(this).val();
 		sortByStatus(sortStatus);
 		recaluclateTasks();
+		$('#header-search').val("");
+		search('');
 	});
 
 	//sort by priority 
@@ -200,6 +226,41 @@ $(function(){
 		let sortStatus = $(this).val();
 		sortPriority(sortStatus);
 		recaluclateTasks();
+		$('#header-search').val("");
 	});
 
+	//search
+	$('#header-search').keyup(function () {
+		let criteria = $(this).val();
+		search(criteria);
+	});
+	function search(criteria){
+		if (criteria.length > 0) {
+			criteria = criteria.toLowerCase();
+			$('.task-content-title').each(function(){
+				let title = $(this).text().toLowerCase();
+				let id = $(this).parent().parent().data('id');
+				let task = $('.task[data-id="'+id+'"]');
+				if (title.indexOf(criteria) < 0) {
+					if (!task.hasClass('hide-task')) {
+						task.addClass('hide-task');
+					}
+				}else{
+					if ($(this).hasClass('hide-task')) {
+						$(this).removeClass('hide-task');
+					}
+				}
+			});
+		}else{
+			$('.task').each(function(){
+				if ($(this).hasClass('hide-task')) {
+					$(this).removeClass('hide-task');
+				}
+			});
+			//check status filter
+			let sortStatus = $('#filter-status').val();
+			sortByStatus(sortStatus);
+		}
+		recaluclateTasks();
+	}
 });

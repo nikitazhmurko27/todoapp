@@ -12,7 +12,20 @@ $(function(){
 	$('#header-date-day').text(dayOfWeek + ", ");
 	$('#header-date-month').text(month + " " + day);
 
-	console.log(dayOfWeek + ", " + month + " " + day);
+	function recaluclateTasks(){
+		let sortStatus = $('#filter-status').val();
+		let count = 0;
+		if (sortStatus != 'all') {
+			count = parseInt($('.task[data-status="'+sortStatus+'"]').length);
+		}else{
+			count = parseInt($('.task').length);
+		}
+		if (count == 1) {
+			$('#tasks_count').text(count + " task");
+		}else{
+			$('#tasks_count').text(count + " tasks");
+		}
+	}
 
 	//disable inputs 
 	function enableDisableInputs(){
@@ -96,6 +109,7 @@ $(function(){
 				sortPriority(prioritySort);
 			}
 			hideAddNew();
+			recaluclateTasks()
 		}else{
 			if (!$('.errorMessage').hasClass('active')){
 				$('.errorMessage').addClass('active');
@@ -108,10 +122,8 @@ $(function(){
 	$('.list-content').on('click','.delete-img',function(){
 		let id = $(this).parent().parent().data('id');
 		$('.task[data-id="'+id+'"]')[0].remove();
+		recaluclateTasks();
 	});
-
-	$('')
-
 
 	//check task as complete
 	function changeTaskStatus(taskId){
@@ -161,6 +173,7 @@ $(function(){
 	$('.header-filter-status').on('change', '#filter-status', function(){
 		let sortStatus = $(this).val();
 		sortByStatus(sortStatus);
+		recaluclateTasks();
 	});
 
 	//sort by priority 
@@ -185,7 +198,8 @@ $(function(){
 
 	$('.header-filter-priority').on('change', '#filter-priotity', function(){
 		let sortStatus = $(this).val();
-		sortPriority(sortStatus)
+		sortPriority(sortStatus);
+		recaluclateTasks();
 	});
 
 });

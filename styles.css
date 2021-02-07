@@ -28,6 +28,15 @@ body{
 	display: block !important;
 }
 
+.task-done{
+	text-decoration: line-through;
+	text-decoration-color: #6E81FF;
+}
+
+.hide-task{
+	display: none !important;
+}
+
 .container{
 	display: flex;
 	flex-direction: column;

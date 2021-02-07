@@ -1,6 +1,6 @@
 $(function(){
 	
-	//disable all inputs 
+	//disable inputs 
 	function enableDisableInputs(){
 		if ($('.new-task').hasClass('active')) {
 			//set opacity to main window(.list)
@@ -16,13 +16,24 @@ $(function(){
 		}
 	}
 
+	function changeTaskStatus(taskId){
+		let task = $('.task[data-id="'+taskId+'"]');
+		if (!task.hasClass('task-done')) {
+			task.addClass('task-done');
+			task.attr('data-status', 'done');
+		}else{
+			task.removeClass('task-done');
+			task.attr('data-status', 'to_do');
+		}
+	}
+
 	function hideErrorMsg(){
 		if ($('.errorMessage').hasClass('active')){
 			$('.errorMessage').removeClass('active');
 		}
 	}
 	//open "add new task" pop-up
-	$('#add_new').click(function(){
+	$('#add_new').on('click', function(){
 		if (!$('.new-task').hasClass('active')){
 			$('.new-task').addClass('active');
 			enableDisableInputs();
@@ -38,7 +49,7 @@ $(function(){
 		}
 	}
 	//cancel "add new task" pop-up
-	$('#new-task-cancel').click(function(){
+	$('#new-task-cancel').on('click', function(){
 		hideAddNew();
 	});
 
@@ -57,7 +68,7 @@ $(function(){
 
 			let taskMarkup = "<div class='task' data-id='"+taskId+"' data-status='to_do' data-priority='"+priority+"'>";
 					taskMarkup+= "<div class='task-status'>";
-						taskMarkup+= "<input type='checkbox' id='tb"+taskId+"'><label for='tb"+taskId+"'></label>";
+						taskMarkup+= "<input type='checkbox' name='complete' id='tb"+taskId+"'><label for='tb"+taskId+"'></label>";
 					taskMarkup+= "</div>";
 					taskMarkup+= "<div class='task-content'>";
 						taskMarkup+="<p class='task-content-title'>"+title+"</p>";
@@ -77,11 +88,18 @@ $(function(){
 		}
 	});
 
-	console.log($('.task[data-id="4"]').length);
-
 	//delete task
 	$('.list-content').on('click','.delete-img',function(){
 		let id = $(this).parent().parent().data('id');
 		$('.task[data-id="'+id+'"]')[0].remove();
 	});
+
+	//check task as complete
+	$('.task-status').on('click', 'input[name=complete]', function(){
+		let taskId = $(this).parent().parent().data('id');
+		//find task with current id and set as complete
+		changeTaskStatus(taskId);
+	});
+
+	
 });
